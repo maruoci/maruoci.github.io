@@ -5,7 +5,7 @@ tags: hexo, git
 ---
 
 # Hexo和Git搭建博客
-[TOC]
+
 ## 1. 准备工作
 
 ### 1.1 安装nodejs
@@ -59,7 +59,7 @@ git --version //检测git版本
 
 ## 3.  Hexo 项目推送到Git
 
-###3.1 准备工作
+### 3.1 准备工作
 
 ####  设置Git的user name和email
 

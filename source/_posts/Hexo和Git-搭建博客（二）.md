@@ -1,15 +1,13 @@
 ---
 title: Hexo和Git 搭建博客（二）
 date: 2018-06-23 00:55:22
-tags: hexo,git
+tags: hexo, git
 ---
 
 # Hexo和Git 搭建博客（二）
 
 >  本节主要描述多台电脑之间如何同步并更新博客。
 >  主要是按照分支提交源文件，master提交静态文件的原则。
-
-[TOC]
 
 ## 创建hexo分支
 
