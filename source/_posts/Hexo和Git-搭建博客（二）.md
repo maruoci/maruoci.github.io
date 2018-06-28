@@ -17,7 +17,7 @@ tags: hexo, git
 
 ## 克隆
 
-执行`git clone git@github.com:maruoci/maruoci.github.io.git` 将仓库克隆至本地。
+执行`git clone git@github.com:ma***ci/ma***ci.github.io.git` 将仓库克隆至本地。
 
 ```
 // 进入该目录
