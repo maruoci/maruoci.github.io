@@ -1,0 +1,257 @@
+---
+title: Java面试题：基础(附答案)
+date: 2018-06-28 11:45:22
+categories:
+- 面试题
+tags:
+- java
+- 面试
+- 基础
+---
+
+个人从网上整理筛选了近50道基础知识点题目，主要是基于基本语法、集合和面向对象相关后续再陆续添加。
+
+
+### 语法基础
+
+  基本数据类型、变量、运算符、字符串、控制流程
+  
+#### 知识点  
+
+  = 和 equals的区别。
+  
+  1、== 属于比较运算符，equals是方法
+  2、== 和 Object的equals方法等同，String重写了equals方法，比较的是内容。
+  
+  final, finally, finalize 的区别
+  
+  final 修饰符，可修饰类、变量、方法和方法参数
+    被final修饰的类不可被继承，比如String
+    被final修饰的变量，当变量属基本类型时代表该变量为一个常量；当变量为引用类型时，不可改变的只是变量引用。
+    被final修饰的方法，可被继承但不可被重写override。
+  finally是修饰代码块，与try/catch一并使用,不考虑try catch 代码块是否会抛异常，finally代码最终执行。
+  finalize是Object的方法， 垃圾回收再GC清理内存前执行的方法。提供给程序做些额外的清理工作。
+
+  String s=new String(“xyz”);创建了几个字符串对象?
+  
+  两个，"xyz" 常量在常量池，new String("xyz")的对象放在 heap中，最后将引用s指向 heap中的对象。
+  
+  静态变量和实例变量的区别。
+  
+  静态变量被static修饰，属于类，所以也叫类变量。而实例变量属于类的实例对象。
+  JVM中，静态变量同class一起加载，在实例加载之前，且内存中仅一个。实例变量则随类实例创建多少就有多少对象。
+    
+  值传递、引用传递的区别。
+  
+  这里应该问的是call by value值调用和引用调用call by reference。
+  值调用：方法接收调用者传过来的值； 引用调用：方法接收调用者提供的变量地址。
+  Java是采用的值调用。
+  
+  ```java
+    class CallTest{
+
+    public String name ;
+
+     public static void main(String[] args){
+       int a = 10;
+       baseTypeTest(a);
+       
+       CallTest t = new CallTest();
+       t.name = "java";
+       changeName(t);
+       
+       changeObj(t);
+     }
+     
+     //基本类型
+     public static void baseTypeTest(int a){
+       a = 20;
+     }
+     
+     //引用类型
+     public static void changeName(CallTest t){
+       t.name = "python";
+     }
+     
+     //引用类型2
+     public static void changeObj(CallTest m){
+       m = new CallTest();
+       m.name = "NONE";
+     }
+    }
+  ```
+  
+  代码说明：
+    1、baseTypeTest 接收基本类型int的参数a, 将a赋值20，主函数的a并没有发生变化，所以是值调用。
+    2、changeName 接收引用类型CallTest参数t，修改t的name值为python，主函数的name也发生变化，这里是引用调用吗？
+    3、肯定不是，如果是引用调用的话，changeObj 函数就会将t 修改为m，name值变为NONE了。
+  
+  Java的四种引用方式(强引用、软引用、弱引用、虚引用)
+  
+  强引用是我们常用的变量引用方式，a = new Object();强引用关联的对象JVM即使是OOM也不会回收该对象。
+  软引用是指一些可有可无的对象，用lang.ref包里的类表示，当内存不足时会回收这类对象。
+  弱引用是指一些可有可无的对象，用lang.ref包里的类表示，JVM垃圾回收时回收这类对象(不考虑内存是否不足)。
+  虚引用它并不影响对象的生命周期，一个对象与虚引用关联，则跟没有引用与之关联一样。
+  
+  char 型变量中能不能存贮一个中文汉字?
+  
+  可以，char占两个字节，Unicode编码的部分汉字是两个字节的。
+  
+  byte的数值范围是多少
+  
+  byte长度1字节，为8位。首位是符号位，0 代表正，1代表负。
+  所以最大值为0111 1111 也就是2^7-1=127 负位最大1000 0000是-128（此处负数要弄清楚原码，反码，补码）
+  
+  最有效的计算2*8的方法
+  
+  2 << 3
+  
+  switch是否能作用在byte上，是否能作用在long上，是否能作用在String上?
+  
+  switch可以作用在char,byte,short,int和他们的包装类；
+  switch可以作用在枚举；
+  switch可以作用在String上(java7以后)；
+  switch不可以作用在double、float、long、boolean上。
+  
+  String为什么要设计成不可变的
+  
+  1、final修饰避免被继承。
+  2、String内部实际是一个私有的final字符数组，这样加上类的不可继承。就避免了数据被破坏。
+  3、不可变的String数据更安全（HashSet、线程安全）。 
+   
+#### 代码题  
+  
+  下面两行代码变量s的运行结果是否有区别,为什么。
+  
+  ```
+  short s=1; s=s+1;
+  short s=1; s+=1
+  ```
+  
+  s = s + 1 ; s + 1 会隐式转换为int 类型， 把int类型赋值给short，会丢失精度，需要强转。
+  s = s + 1 ; s +=1 += 属于操作符，系统在执行时会自动强转。
+  
+  下面两行代码`a==b`的运行结果是否有区别,为什么。
+  
+  ```
+    Integer a,b = 100;  a==b
+    Integer a,b = 200;  a==b
+  ```  
+  
+  int的包装类在-128-127之间的值是一个IntegerCache数组，这个区间内的数值会复用，== 值为true。
+  -128--127之外的数据都是不同的对象引用，== 值为false
+  
+  
+  float f = 3.4; 是否正确？
+  
+  3.4 默认属于double类型，double转float会丢失精度，需要强转。
+  
+### 集合类
+
+  List 、 Set 和 Map 三者区别
+  
+  List、Set都继承了Collection接口，Map没有
+  List、Set是元素存储，Map是键值对存储的。
+  
+  ArrayList 、LinkedList 与 Vector 的区别
+  
+  ArrayList与Vector都是对象数组存储，LinkedList是双向链表的存储方式。
+  因为是数组存储所以ArrayList与Vector在随机查询时效率较高，LinkedList因为查询时移动指针效率较低
+  Linked基于双向链表存储，LinkedList的插入或删除节点效率较高，ArrayList因为有一个数组拷贝的过程，效率较低。
+  ArrayList是线程不安全的，Vector因为使用synchronized修饰，所以是线程安全的。
+  Vector可以设置扩容大小,默认为原来的2倍，ArrayList不支持设置扩容大小，扩容1.5倍，Vector双向链表不存在扩容问题。
+  
+  HashMap 和 HashTable 的区别
+  
+  HashMap 继承AtstractMap ， HashTable继承Dictionary
+  HashMap 不是线程安全的，HashTable被synchronized修饰，所以是线程安全的。
+  HashMap 可以存储null的key和value，HashTable不可以。
+  HashTable 存在一个contains方法和containsValue方法，HashMap因为避免歧义去掉了contains方法。
+  HashMap存储时重写了hash方法，HashTable使用的Object的hash方法。
+  
+  HashSet 和 HashMap 区别
+  
+  HashSet是实现Set接口，HashMap是实现Map
+  HashSet存储对象，HashMap存储键值对
+  HashSet添加对象add方法，HashMap是put方法
+  
+  HashMap 的工作原理及代码实现
+  
+  基于数组+链表的形式存储数据，默认容量(桶)大小是16，map里有一个默认增长因子为0.75
+  当桶的数量大于16*0.75=12时，会触发扩容。或者当桶中数据超过默认的8个且此时桶的个数小于默认64个时也会触发扩容。
+  当桶中数据超过8个，且桶个数超过64时，桶的数据存储由链表转为红黑树。
+  
+  HashMap在添加元素时，会使用key的hash值 和 桶个数 n 去做位运算。 hash(key) & (n-1) 碰撞获取桶的位置，并存储。
+  hash的计算采用高16位^低16位的方式来计算(h=key.hash()) ^ ( h>>>16 )，使数据的分布更均匀。
+  当key为null时，默认存在第一个桶。
+  
+  HashMap 和 ConcurrentHashMap 的区别
+  
+  ConcurrentHashMap 的工作原理及代码实现
+  
+  Collections.synchronizedMap 与 ConcurrentHashMap的区别
+
+### 面向对象(封装、继承、多态)
+
+  面向对象的三大特征与理解。
+  
+  自动装箱与自动拆箱。
+  
+  (多态)向上转型与向下转型的理解。
+  
+  java中实现多态的机制是什么。
+  
+  访问修饰符的区别。
+  
+  抽象类与接口的区别。
+  
+  抽象类特点及应用场景。
+  
+  构造器Constructor是否可被override。
+  
+  接口是否可继承接口? 抽象类是否可实现接口? 抽象类是否可继承实体类。
+  
+  abstract的method是否可同时是static,是否可同时是native，是否可同时是synchronized。
+  
+  自定义类，构造器函数是否必须的。
+  
+  是否可以从一个static方法内部发出对非static方法的调用。
+  
+
+
+### 异常
+
+   常见的运行时异常有哪些？
+  
+   异常分类及处理机制。
+  
+   Exception RuntimeException 区别
+   
+   Error与Exception区别  
+
+### 泛型、反射、注解、动态代理  
+  
+   泛型的特点及使用场景。
+   
+   List <T> 与 List <?> 的区别
+   
+   除了使用new创建对象之外，还可以用什么方法创建对象。
+   
+   反射的特点及使用场景。
+   
+   Java反射创建对象效率高还是通过new创建对象的效率高。
+   
+   java反射的原理。
+   
+   JAVA序列化。
+   
+   Serializable 和Parcelable 的区别。
+   
+   说说自定义注解的场景及实现
+
+### 内部类、匿名内部类、IO、其他
+    
+   内部类与匿名内部类的区别
+   
+   Java8的新特性   
+
