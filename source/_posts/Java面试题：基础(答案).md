@@ -18,7 +18,7 @@ tags:
   
 #### 知识点  
 
-  = 和 equals的区别。
+  == 和 equals的区别。
   
   1、== 属于比较运算符，equals是方法
   2、== 和 Object的equals方法等同，String重写了equals方法，比较的是内容。
@@ -195,17 +195,78 @@ tags:
 
   面向对象的三大特征与理解。
   
+  封装：隐藏实现细节，使代码模块化。
+  继承：is-a的从属关系，子类继承父类的非私有变量及方法，提高代码复用。
+  多态：主要是重写与重载。重载属于一种编译期的多态体现，重写属于运行时多态。不同类对同一消息做的不同响应。
+      实现方式是子类继承或实现父类，重写父类方法或接口。父类引用指向子类对象。这样相同类型的父类引用不同的子类对象，
+      对同一方法做出不同的响应。但这种对于子类独有方法就不管用了。另外因为java单继承的原因。接口的多态体现比类的多态
+      有更高的灵活性。
+      
+  
   自动装箱与自动拆箱。
   
-  (多态)向上转型与向下转型的理解。
+  自动装箱，就是系统自动将基本数据类型转换为包装类的过程，比如`Integer i =10`等同于`Integer i = Integer.valueOf(10)`
+  自动拆箱，反之。
+  
+  向上转型与向下转型的理解。
+    
+  父类引用指向子类对象为向上转型。反之为向下转型。
+  下面记录了一个比较经典的代码题，可加深理解。
+  
+  ```java
+  public class OverrideTest2 {
+  
+    public static void main(String[] args) {
+      A a1 = new A(); A a2 = new B();
+      B b = new B();  C c = new C() ; D d = new D();
+      System.out.println("1--" + a1.show(b));System.out.println("2--" + a1.show(c));
+      System.out.println("3--" + a1.show(d));System.out.println("4--" + a2.show(b));
+      System.out.println("5--" + a2.show(c));System.out.println("6--" + a2.show(d));
+      System.out.println("7--" + b.show(b));System.out.println("8--" + b.show(c));
+      System.out.println("9--" + b.show(d));
+    }
+  }
+  
+  class A {
+    public String show(D obj) { return ("A and D"); }
+    public String show(A obj) { return ("A and A"); }
+  }
+  class B extends A{
+    @Override
+    public String show(D obj) { return ("A and D"); }
+    public String show(B obj) { return ("B and B"); }
+    @Override
+    public String show(A obj) { return ("B and A"); }
+  }
+  class C extends B{ }
+  class D extends B{ }
+
+  ```
   
   java中实现多态的机制是什么。
   
+  java实现多态主要分两种，编译时多态与运行时多态。
+  编译时多态 主要体现在 方法重载overload。同样的方法具有不同的方法签名，形如`add(int index, E element)` 无返回类型。
+  运行时多态 主要体现在 方法重写override。主要有两种方式，extend继承与implements实现接口。
+  
   访问修饰符的区别。
+  
+  public    全包
+  protected 本包 + 子类
+  default   本包
+  private   本类
   
   抽象类与接口的区别。
   
+  抽象类可以有具体的方法实现，接口的方法全是抽象方法。
+  抽象类的变量没有限制，接口的变量都是public static final修饰的。
+  抽象类可以有静态变量与静态代码块，接口不可以。
+  一个类只可以继承一个抽象类，但可以实现多个接口。
+  
   抽象类特点及应用场景。
+  
+  抽象类是对事物的抽象；
+  接口是对行为的抽象。
   
   构造器Constructor是否可被override。
   
