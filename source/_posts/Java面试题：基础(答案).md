@@ -123,28 +123,27 @@ tags:
   
   下面两行代码变量s的运行结果是否有区别,为什么。
   
-  ```
-  short s=1; s=s+1;
-  short s=1; s+=1
-  ```
+```
+short s=1; s=s+1;
+short s=1; s+=1
+```
   
-  s = s + 1 ; s + 1 会隐式转换为int 类型， 把int类型赋值给short，会丢失精度，需要强转。
+  s = s + 1 ; s + 1 会隐式转换为int类型， 把int类型赋值给short，会丢失精度，需要强转。
   s = s + 1 ; s +=1 += 属于操作符，系统在执行时会自动强转。
   
   下面两行代码`a==b`的运行结果是否有区别,为什么。
   
-  ```
-    Integer a,b = 100;  a==b
-    Integer a,b = 200;  a==b
-  ```  
-  
+```
+  Integer a,b = 100;  a==b
+  Integer a,b = 200;  a==b
+``` 
+    
   int的包装类在-128-127之间的值是一个IntegerCache数组，这个区间内的数值会复用，== 值为true。
   -128--127之外的数据都是不同的对象引用，== 值为false
   
-  
   float f = 3.4; 是否正确？
   
-  3.4 默认属于double类型，double转float会丢失精度，需要强转。
+  3.4默认属于double类型，double转float会丢失精度，需要强转。
   
 ### 集合类
 
@@ -201,7 +200,6 @@ tags:
       实现方式是子类继承或实现父类，重写父类方法或接口。父类引用指向子类对象。这样相同类型的父类引用不同的子类对象，
       对同一方法做出不同的响应。但这种对于子类独有方法就不管用了。另外因为java单继承的原因。接口的多态体现比类的多态
       有更高的灵活性。
-      
   
   自动装箱与自动拆箱。
   
@@ -272,37 +270,80 @@ tags:
   
   接口是否可继承接口? 抽象类是否可实现接口? 抽象类是否可继承实体类。
   
+  接口可继承接口，抽象类可实现接口，抽象类可继承实体类。
+  
   abstract的method是否可同时是static,是否可同时是native，是否可同时是synchronized。
+  
+  都不可以。
   
   自定义类，构造器函数是否必须的。
   
+  不必须。
+  
   是否可以从一个static方法内部发出对非static方法的调用。
   
-
+  不可以。
 
 ### 异常
 
    常见的运行时异常有哪些？
   
-   异常分类及处理机制。
+   NullPointerException、IndexOutOfBoundsException、NumberFormatException、ClassCastException、
+   ArithmeticException、IllegalArgumentException
   
+   异常分类及处理机制。
+   
+   异常的父类为Throwable，下一层的子类有Error、Exception、StackRecorder(其他包的)。
+   Error是靠程序无法恢复的错误，比如内存不足等。遇到此类错误大多数建议程序中止。
+   Exception表示程序可以处理的异常，遇到此类异常应该尽可能的去处理。
+       
+   处理机制 throw、throws、try...catch、系统自动抛出。
+      
    Exception RuntimeException 区别
    
+   另外Exception类还可以分为：受检异常和非受检异常。
+    RunTimeException运行时异常属于非受检异常，程序可能出现此异常时，JVM不会检查他。
+      此类异常一般是程序编程不当引起的，应当修改代码尽量避免。
+    受检异常如IOException、InterruptedException需要try...catch捕获或者throws向上抛出，否则编译报错。
+    此类异常为程序可以处理的。如果方法本身不能处理， 调用者需要处理使程序正常运行，不至于让程序中止。
+   
    Error与Exception区别  
+   
+   Error和RuntimeException,JVM都不会去检查此类异常。出现此类异常，程序都会中止。
+   他们不同在于Error一般是JVM抛出的错误，RuntimeException则是程序代码错误。
 
 ### 泛型、反射、注解、动态代理  
   
    泛型的特点及使用场景。
    
+   泛型的特点：
+      以List为例，泛型可以将类型转换异常从运行期提前到编译期。	
+      泛型只在编译时期有效，编译后的字节码文件中不存在有泛型信息(泛型擦除)。 
+   泛型的使用场景：抽象类、接口
+   
    List <T> 与 List <?> 的区别
+   
+   List<T> 用于声明一个泛型类的类型参数。List<?>不能声明类型参数。
+   List<?>主要在于使用泛型方法时不确定返回类型，?表示无限制通配符，参数可以是任意类型。
    
    除了使用new创建对象之外，还可以用什么方法创建对象。
    
+   Class类的newInstance()方法
+   clone()方法，需实现Cloneable接口并重写clone()方法
+   反序列化。
+   
    反射的特点及使用场景。
+   
+   运行时获取类的实例、方法、属性与注解并且能够调用类的方法。这个在框架比如xml配置文件上面体现较多，降低了类之间的耦合，更灵活。
+   反射的使用场景：加载数据库驱动、xml配置文件等。
    
    Java反射创建对象效率高还是通过new创建对象的效率高。
    
+   ...
+   
    java反射的原理。
+   
+   ...
    
    JAVA序列化。
    
