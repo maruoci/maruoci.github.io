@@ -19,11 +19,11 @@ tags:
   
   简要描述下三种链接方式的区别。
   
-    + 桥接: VMWare会虚拟一块网卡和真正的物理网卡桥接。物理网卡可以上网，那么桥接的软网卡也没有问题。(两者必须在同一网段)
-    
-    + NAT (推荐): 虚拟机不占用主机所在局域网的ip，使用主机的NAT功能访问局域网和互联网，意味着虚拟机可以访问局域网中的其他电脑，但是其他电脑不知道虚拟机的存在。
-    
-    + Host-only: 不可以上网
+  + 桥接: VMWare会虚拟一块网卡和真正的物理网卡桥接。物理网卡可以上网，那么桥接的软网卡也没有问题。(两者必须在同一网段)
+  
+  + NAT (推荐): 虚拟机不占用主机所在局域网的ip，使用主机的NAT功能访问局域网和互联网，意味着虚拟机可以访问局域网中的其他电脑，但是其他电脑不知道虚拟机的存在。
+  
+  + Host-only: 不可以上网
   
 #### 安装 CentOS7
 
@@ -140,7 +140,12 @@ tags:
   宿主机使用ssh连接虚拟机时，连接过程特别慢。度娘了一下，需要修改sshd的配置。
   
   `vi /etc/ssh/sshd_config`，放开UseDNS的注释，并将其设置为 no ，重启sshd服务即可。  
-  
+
+#### 参考地址
+
+  + [VMware配置网络的3种方式：NAT、Host-Only、Bridged](https://blog.csdn.net/u014726937/article/details/52768463)
+  + [新手学Linux：在VMware14中安装CentOS7详细教程](https://blog.csdn.net/yiyihuazi/article/details/78557216)
+  + [解决ssh访问linux虚拟机特别慢](https://blog.csdn.net/gxdvip/article/details/50977652)
   
 
 
