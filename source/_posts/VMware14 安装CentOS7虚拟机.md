@@ -71,17 +71,17 @@ tags:
   
   ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/44713366.jpg)
 
-  设置网关 192.168.19.1， 点击确定，完成网络设置。
+  设置网关 192.168.19.2， 点击确定，完成网络设置。
   
-  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/35747283.jpg)          
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/10789823.jpg)          
     
   打开网络共享中心，更改适配器设置，找到VMnet8网络
   
   ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/62825701.jpg)
 
-  右键属性，选择Ipv4，设置VMnet8的ip为刚才虚拟机内设置的网关地址 192.168.19.1。
+  右键属性，选择Ipv4，设置VMnet8的ip为 192.168.19.1 网关为 192.168.19.2。
   
-  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/42804729.jpg)
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/89923314.jpg)
   
   完成网络配置。
 
@@ -125,7 +125,7 @@ tags:
   
   `vi /etc/sysconfig/network-scripts/ifcfg-ens33`修改网络配置
   
-  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/24576548.jpg)
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-7-25/87794720.jpg)
   
   保存，并`network service restart`重启。
   
@@ -140,7 +140,7 @@ tags:
   宿主机使用ssh连接虚拟机时，连接过程特别慢。度娘了一下，需要修改sshd的配置。
   
   `vi /etc/ssh/sshd_config`，放开UseDNS的注释，并将其设置为 no ，重启sshd服务即可。  
-
+  
 #### 参考地址
 
   + [VMware配置网络的3种方式：NAT、Host-Only、Bridged](https://blog.csdn.net/u014726937/article/details/52768463)
