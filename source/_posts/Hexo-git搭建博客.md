@@ -1,7 +1,7 @@
 ---
 title: Hexo+git搭建博客
 date: 2018-06-23 00:49:25
-tags: hexo, git
+tags: hexo
 ---
 
 # Hexo和Git搭建博客
@@ -15,6 +15,7 @@ tags: hexo, git
   这里也可以从[淘宝镜像](https://npm.taobao.org/)去下载。
  
   一路默认下一步安装。
+  <!-- more -->
 
 ### 1.2 安装Hexo
 

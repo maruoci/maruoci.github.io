@@ -20,6 +20,8 @@ tags:
 
   sql语句中的执行顺序。
 
+  <!-- more -->
+
   Mysql数据库3种存储引擎有什么区别？
 
   left join、right join、inner join 区别。

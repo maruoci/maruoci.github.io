@@ -4,9 +4,8 @@ date: 2018-07-10 19:40:10
 categories:
 - 面试题
 tags:
-- java
+- Java
 - 面试
-- Web
 - Spring
 ---
 
@@ -23,6 +22,8 @@ tags:
   Http的get与post请求的区别。
 
   http请求到服务器经历过那些流程
+
+  <!-- more -->
   
   1.浏览器dns解析请求ip
   2.浏览器向ip所在服务器建立TCP连接

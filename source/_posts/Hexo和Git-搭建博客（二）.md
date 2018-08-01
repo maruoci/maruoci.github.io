@@ -15,6 +15,8 @@ tags: hexo, git
 
 并settings-> branches-> Default branch 将hexo 设置为默认分支并update。
 
+  <!-- more -->
+
 ## 克隆
 
 执行`git clone git@github.com:ma***ci/ma***ci.github.io.git` 将仓库克隆至本地。

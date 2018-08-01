@@ -4,9 +4,8 @@ date: 2018-06-28 10:40:10
 categories:
 - 面试题
 tags:
-- java
+- Java
 - 面试
-- Web
 - Spring
 ---
 
@@ -21,6 +20,8 @@ tags:
   Http的get与post请求的区别。
 
   http请求到服务器经历过那些流程
+  
+  <!-- more -->
   
   我们在web应用开发过程中经常遇到输出某种编码的字符，如iso-8859-1等，如何输出一个某种编码的字符串？
   
