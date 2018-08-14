@@ -324,14 +324,101 @@ tags:
 
 ### JVM的类加载机制
 
+  + 什么是类加载机制
+  
+  JVM把描述类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。
+  
+  + 什么时候执行类加载
+  
+  Java虚拟机不强制要求什么时候进行类加载的第一阶段：加载。但是对初始化阶段严格规定了5种情况。(加载与链接当然要在此之前开始)
+    + 主动引用：
+      + new 实例化对象、读取或设置类静态变量(final修饰的常量除外)、调用类静态方法。
+      + 使用java.lang.reflect对类进行反射调用时。
+      + 虚拟机启动，用户指定主类(包含main方法的那个类)，虚拟机会先初始化。
+      + JDK1.7之后，如果一个java.lang.invoke.MethodHandle实例最后的解析结果REF_getStatic、REF_putStatic、REF_invokeStatic的方法句柄，并且这个方法句柄所对应的类没有进行过初始化，则需要先触发其初始化
+    + 被动引用： 
+      + 子类引用父类的静态字段，不会导致子类初始化。
+      + 数组定义类引用，不会导致该类初始化。
+      + final修饰的常量调用，不会触发初始化。
+   
+      ```java
+      // 被动引用示例一：SuperClass init！ 123
+      public class SuperClass {
+        static { System.out.println("SuperClass init！"); }
+        public static int value = 123;
+      }
+      class SubClass extends SuperClass {
+        static { System.out.println("SubClass init！"); }
+      }
+      class NotInitialization {
+        public static void main(String[] args) {
+          System.out.println(SubClass.value);
+        }
+      }
+      //被动示例二：
+      SuperClass[] sca = new SuperClass[10];
+      //被动示例三：
+      public class ConstClass {
+        static { System.out.println("ConstClass init"); }
+        public static final String HELLO_WORLD = "hello";
+      }
+      class NotInitialization2{
+        public static void main(String[] args) {
+          System.out.println(ConstClass.HELLO_WORLD);
+        }
+      }
+      ```
+  
 #### 类加载的过程
-
+  
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-8-14/17327939.jpg)
+  
   + 加载
     + 通过类的全限定名获取定义此类的二进制字节流。
     + 将字节流的静态存储结果转化为方法区的运行时数据结构。
     + 在内存中生成一个代表这个类的Class对象，作为方法区的这个类的各种数据的访问入口。
 
+  + 验证
+    确保Class文件的字节流符合JVM虚拟机的规范与安全要求。
+    + 文件格式验证：验证Class文件的格式规范
+      + 是否以魔数0XCAFEBABE开头
+      + 主、次版本号是否在当前虚拟机处理范围之内。
+      + 常量池中的常量是否有不被支持的常量类型
+      + 等等...
+    + 元数据验证：对字节码的描述信息进行语义分析，保证其描述符合Java语言规范
+      + 验证这个类是否有父类(非Object)
+      + 这个类的父类是否继承了不允许被继承的类(final修饰)
+      + 如果该类非抽象类，是否实现父类或接口中的抽象方法。
+      + 等等...
+    + 字节码验证
+    + 符号引用验证
+    
+  + 准备
+    正式为类变量分配内存并设置类变量的初始值。这些类变量使用内存都在方法区分配。
+    + 这里仅为类变量分配内存。实例变量是对象实例化时随对象分配在Java堆中。
+    + 类变量的初始值是数据类型的零值，而非定义的值。(ConstantValue除外)
+    
+    ```java
+    public static int a = 123;  // a 赋初值0，初始化阶段a才会被初始化123
+    public final static int b = 1234; // 编译会为b生成ConstantValue属性，准备阶段直接为它赋值为1234
+    ```
+    
+  + 解析    
+    虚拟机将常量池内的符号引用替换为直接引用的过程。
+    + 符号引用（Symbolic References）：符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。
+    + 直接引用（Direct References）：直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄。
+  
+  + 初始化
+    初始化是类加载的最后一步。执行类构造器`<clinit>()`方法的过程。
+    
+    + 类加载的静态块只能访问定义在静态语句之前的变量，静态语句之后的变量只能赋值，不能访问。(非法向前引用)
+    + 虚拟机会保证父类的`<clinit>`方法在子类的`<clinit>`方法前执行。
+    + 如果类中没有静态块，也没有对变量的赋值操作，编译器不会生成`<clinit>`方法。
+    + 接口也可能会有变量的赋值，但和类不同的是，接口的clinit方法不需要先执行父接口的。只有父接口的变量使用时，父接口才会初始化。
 
+      
+    
+      
 
   
   
