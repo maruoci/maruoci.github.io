@@ -66,45 +66,7 @@ tags:
 
 #### 计算属性
 
-  示例：
-  ```html
-  <body>
-    <div id="root">
-      <p>message: {{ message }}</p>
-      <p>reversed_message_w: {{ reversed_message_w }} </p>
-      <p>reversed_message_m: {{ reversed_message_m() }} </p>
-      <p>reversed_message: {{ reversed_message }} </p>
-    </div>
-
-    <script type="text/javascript" src="./vue.js"></script>
-    <script type="text/javascript">
-      var vm = new Vue({
-        el: '#root',
-        data: {
-          message: "Hello , Vue!",
-          reversed_message_w : "aa"
-        },
-        methods:{
-          reversed_message_m: function(){
-            return this.message.split('').reverse().join('')
-          }
-        },
-        computed:{
-          reversed_message: function(){
-            return this.message.split('').reverse().join('')
-          }
-        },
-        watch: {
-          message: function(val){
-            this.reversed_message_w = val.split('').reverse().join('')
-          }
-        }
-      })
-    </script>
-  </body>
-  // message: Hello , Vue!
-  // reversed_message: !euV , olleH
-  ```    
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-8-16/98702004.jpg)
 
   + 通过computed，声明一个reversed_message 计算属性。
   
@@ -117,5 +79,20 @@ tags:
   2. watch属性则会导致代码量相对繁琐且如果涉及多字段(FullName)计算时代码重复。
   
   所以可以使用computed的时候，尽量优先使用computed。  
+
  
 
+#### 样式绑定
+
+  ![](http://pbsg2r9io.bkt.clouddn.com/18-8-16/27930173.jpg)
+
+  + `:class="{redClass: isActive}"` 当isActive为true，则class="redClass"
+  + `:class="[activated]"` class为activated所绑定的数据值。
+
+#### 条件渲染
+
+  + `<span v-if="seen">hello</span>`
+  + `<span v-show="seen">hello</span>` 
+  
+  v-if有更高的切换开销，当条件频繁切换时，v-show效率会更高一些。 
+    
