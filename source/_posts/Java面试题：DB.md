@@ -5,9 +5,8 @@ categories:
 - 面试题
 tags:
 - Java
-- redis
+- Redis
 - Mysql
-- 面试
 ---
 
   个人从网上整理筛选了近30道相关面试题目。

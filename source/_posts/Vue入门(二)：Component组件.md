@@ -2,7 +2,7 @@
 title: "Vue入门 (二): Component组件"
 date: 2018-08-12 14:22:42
 categories:
-- Vue
+- 前端
 tags:
 - Vue
 ---

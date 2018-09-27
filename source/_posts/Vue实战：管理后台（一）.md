@@ -2,7 +2,7 @@
 title: "Vue实战：管理后台（一）"
 date: 2018-08-23 11:35:42
 categories:
-- Vue
+- 前端
 tags:
 - Vue
 ---

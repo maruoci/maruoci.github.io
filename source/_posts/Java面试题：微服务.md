@@ -1,4 +1,4 @@
----
+	---
 title: Java面试题：微服务
 date: 2018-06-28 11:30:10
 categories:
@@ -6,7 +6,6 @@ categories:
 tags:
 - Java
 - 微服务
-- 面试
 ---
 
   个人从网上整理筛选了近30道dubbo相关面试题目。

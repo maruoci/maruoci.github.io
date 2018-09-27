@@ -2,7 +2,7 @@
 title: "Vue入门 (三): Vue语法"
 date: 2018-08-12 17:32:42
 categories:
-- Vue
+- 前端
 tags:
 - Vue
 ---

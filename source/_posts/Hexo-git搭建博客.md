@@ -1,7 +1,11 @@
 ---
 title: Hexo+git搭建博客
 date: 2018-06-23 00:49:25
-tags: hexo
+categories:
+- Hexo
+tags: 
+- Hexo
+- Git
 ---
 
 # Hexo和Git搭建博客

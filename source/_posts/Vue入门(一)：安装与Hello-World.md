@@ -2,7 +2,7 @@
 title: Vue入门(一)：安装与Hello World
 date: 2018-08-12 10:36:29
 categories:
-- Vue
+- 前端
 tags:
 - Vue
 ---
