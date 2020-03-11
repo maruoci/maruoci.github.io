@@ -1,4 +1,4 @@
----
+﻿---
 title: RabbitMQ：安装
 date: 2020-03-11 16:47:42
 categories:
@@ -24,7 +24,7 @@ tags:
  
  设置环境变量,增加系统变量：ERLANG_HOME
  
- ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-01.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-02.jpg)
  
  修改环境变量Path，追加：%ERLANG_HOME%\bin;
 
