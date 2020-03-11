@@ -18,13 +18,13 @@ tags:
 
  下载地址： [官网](http://www.erlang.org/downloads)
 
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-01.png)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-01.png)
 
  官网地址下载较慢，建议从RabbitMQ官网下载。[https://www.erlang-solutions.com/resources/download.html](https://www.erlang-solutions.com/resources/download.html),下载完成，一路默认安装即可。
  
  设置环境变量,增加系统变量：ERLANG_HOME
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-01.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-01.jpg)
  
  修改环境变量Path，追加：%ERLANG_HOME%\bin;
 
@@ -32,11 +32,11 @@ tags:
 
  RabbitMQ[下载](http://www.rabbitmq.com/download.html)有[安装包](http://www.rabbitmq.com/install-windows.html)和[解压包](http://www.rabbitmq.com/install-windows-manual.html)，此处选择解压包下载。
 
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-03.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-03.jpg)
 
  设置环境变量，增加系统变量RABBITMQ_SERVER
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-04.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-04.jpg)
  
  修改环境变量Path，追加：%RABBITMQ_SERVER%\sbin;
  
@@ -44,23 +44,23 @@ tags:
 
  cmd切换到rabbitMQ的安装目录下的sbin目录，输入rabbitmqctl status
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-05.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-05.jpg)
  
  此时说明rabbitMq未启动，安装插件，在sbin目录输入rabbitmq-plugins.bat enable rabbitmq_management。
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-06.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-06.jpg)
   
  启动rabbitMq，输入命令：rabbitmq-server.bat
 
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-07.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-07.jpg)
  
  rabbitmq启动成功，浏览器中访问：http://localhost:15672
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-08.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-08.jpg)
  
  输入guest,guest进入rabbitMQ管理控制台：
  
- ![](https://raw.githubusercontent.com/maruoci/images/blob/master/Java/RabbitMQ/mq-setup-09.jpg)
+ ![](https://raw.githubusercontent.com/maruoci/images/master/Java/RabbitMQ/mq-setup-09.jpg)
  
  至此，rabbitMQ安装部署完成。
  
